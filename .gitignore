@@ -1,0 +1,11 @@
+.DS_STORE
+*.pyc
+src/config/config.py
+globals.py
+*.db
+*.json
+*.pkl
+**.txt
+venv/*
+.coverage
+htmlcov/
