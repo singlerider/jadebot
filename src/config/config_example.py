@@ -1,12 +1,11 @@
 global config
 
-import src.lib.commands.pokemon as pokemon
-import src.lib.commands.treats as treats
-
 channels_to_join = ['#singlerider']
 
 for channel in channels_to_join:
     channel = channel.lstrip('#')
+
+twitch_scopes = ["channel_subscriptions", "user_subscriptions"]
 
 config = {
     # details required to login to twitch IRC server
@@ -25,8 +24,8 @@ config = {
     'cron': {
         '#singlerider': [
             # time, run, callback
-            (60, True, pokemon.cron),  # pokemon released every 20 minutes
-            (600, True, treats.cron),  # treat handed out every 10 minutes
+            # (60, True, pokemon.cron),  # pokemon released every 20 minutes
+            # (600, True, treats.cron),  # treat handed out every 10 minutes
         ],
     },
 }

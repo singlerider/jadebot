@@ -17,10 +17,6 @@ from src.lib.twitch import Twitch
 from lib.functions_general import *
 from src.config.config import config
 from src.lib.irc import IRC
-from src.lib.queries.command_queries import *
-from src.lib.queries.message_queries import save_message
-from src.lib.queries.moderator_queries import get_moderator
-from src.lib.queries.points_queries import *
 
 reload(sys)
 sys.setdefaultencoding("utf8")
@@ -28,14 +24,12 @@ sys.setdefaultencoding("utf8")
 PRIMARY_CHANNEL = "jadejolie"
 BOT_USER = "jadebot"
 SUPERUSER = "singlerider"
-TEST_USER = "theepicsnail_"
+TEST_USER = "duck__butter"
 EXTRA_CHANNEL = "lorenzotherobot"
 
 SERVER = config["server"]
 NICKNAME = config["username"]
 PASSWORD = config["oauth_password"]
-
-ECHOERS = {}
 
 
 class Bot(object):
@@ -63,12 +57,12 @@ class Bot(object):
             moderator = get_moderator(username, chan)
             if moderator:
                 increment_command_counter(chan, message[0])
-                save_message(BOT_USER, channel, resp)
+                # save_message(BOT_USER, channel, resp)
                 print("!-> " + resp)
                 return resp
         elif elements[0] == "reg":
             increment_command_counter(chan, message[0])
-            save_message(BOT_USER, channel, resp)
+            # save_message(BOT_USER, channel, resp)
             print("!-> " + resp)
             return resp
 
@@ -89,7 +83,7 @@ class Bot(object):
                         channel, message_split, username)
                     if resp:
                         self.IRC.send_message(channel, resp)
-        save_message(username, channel, message)
+        # save_message(username, channel, message)
         part = message.split(' ')[0]
         valid = False
         if commands.is_valid_command(message):
@@ -121,7 +115,7 @@ class Bot(object):
                         channel, message_split, username)
                     if resp:
                         self.IRC.send_alt_message(channel, resp)
-        save_message(username, channel, message)
+        # save_message(username, channel, message)
         part = message.split(' ')[0]
         valid = False
         if commands.is_valid_command(message):
@@ -139,10 +133,10 @@ class Bot(object):
     def whisper(self, username, channel, message):
         message = str(message.lstrip("!"))
         resp = rive.Conversation(self).run(username, message)[:350]
-        save_message(username, "WHISPER", message)
+        # save_message(username, "WHISPER", message)
         if resp:
             print resp
-            save_message(BOT_USER, "WHISPER", resp)
+            # save_message(BOT_USER, "WHISPER", resp)
             self.IRC.send_whisper(username, str(resp))
             return
 
@@ -213,7 +207,7 @@ ask me directly?")
             resp = '(%s) : %s' % (username, result)
             pbot(resp, channel)
             return resp[:350]
-            save_message(BOT_USER, channel, resp)  # pragma: no cover
+            # save_message(BOT_USER, channel, resp)  # pragma: no cover
 
     def check_for_sub(self, channel, username, message):
         try:
@@ -225,7 +219,7 @@ ask me directly?")
 time subscription!".format(100, subbed_user)
                 self.IRC.send_message(channel, resp)
                 self.IRC.send_alt_message(channel, resp)
-                save_message(BOT_USER, channel, resp)
+                # save_message(BOT_USER, channel, resp)
             elif message_split[1] == "subscribed" and len(message_split) < 9:
                 months_subbed = message_split[3]
                 modify_user_points(subbed_user, int(months_subbed) * 100)
@@ -234,7 +228,7 @@ months straight and is getting {2} treats for loyalty!".format(
                     subbed_user, months_subbed, int(months_subbed) * 100)
                 self.IRC.send_message(channel, resp)
                 self.IRC.send_alt_message(channel, resp)
-                save_message(BOT_USER, channel, resp)
+                # save_message(BOT_USER, channel, resp)
         except Exception as error:  # pragma: no cover
             print error
 
