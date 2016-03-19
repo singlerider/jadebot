@@ -4,7 +4,7 @@ commands = {
         'argc': 1,
         'return': 'command',
         'space_case': True,
-        'ul': 'mod',
+        'user_level': 'mod',
         'usage': "!report [insert bug report text here]"
     },
     '!commands': {
@@ -17,23 +17,23 @@ commands = {
         'limit': 0,
         'argc': 0,
         'return': 'command',
-        'ul': 'reg',
+        'user_level': 'reg',
         'usage': '!opinion',
         'user_limit': 30
     },
-    # '!llama': {
-    #     'limit': 0,
-    #     'argc': 1,
-    #     'return': 'command',
-    #     'usage': "!llama ['treats'/'shots'/username/'list']",
-    #     'optional': True,
-    #     'user_limit': 30
-    # },
+    '!points': {
+        'limit': 0,
+        'argc': 1,
+        'return': 'command',
+        'usage': "!points ['treats'/'shots'/username/'list']",
+        'optional': True,
+        'user_limit': 30
+    },
     # '!treats': {
     #     'limit': 0,
     #     'return': 'command',
     #     'argc': 3,
-    #     'ul': 'mod',
+    #     'user_level': 'mod',
     #     'usage': '!treats [add/remove/set] [username] [number]'
     # },
     '!help': {
@@ -54,7 +54,7 @@ commands = {
         'return': 'command',
         'argc': 1,
         'usage': '!follower [username]',
-        'ul': 'mod'
+        'user_level': 'mod'
     },
     '!uptime': {
         'limit': 15,
@@ -96,42 +96,42 @@ commands = {
         'argc': 1,
         'return': 'command',
         'usage': '!caster [streamer_username]',
-        'ul': 'mod'
+        'user_level': 'mod'
     },
     '!donation': {
         'limit': 0,
         'argc': 2,
         'return': 'command',
         'usage': '!donation [username] [dollar_amount]',
-        'ul': 'mod'
+        'user_level': 'mod'
     },
     '!add': {
         'limit': 0,
         'argc': 4,
         'return': 'command',
         'usage': '!add [!command_name] [user_level (reg/mod)] [response (to add a custom user, use "{}") (to include message count, use "[]")]',
-        'ul': 'mod'
+        'user_level': 'mod'
     },
     '!rem': {
         'limit': 0,
         'argc': 1,
         'return': 'command',
         'usage': '!rem [!command_name]',
-        'ul': 'mod'
+        'user_level': 'mod'
     },
     '!edit': {
         'limit': 0,
         'argc': 4,
         'return': 'command',
         'usage': '!edit [!command_name] [user_level (reg/mod)] [response (to add a custom user, use "{}")]',
-        'ul': 'mod'
+        'user_level': 'mod'
     },
     '!weather': {
         'limit': 0,
         'argc': 2,
         'return': 'command',
         'usage': '!weather [units (metric/imperial)] [location (any format)]',
-        'ul': 'mod'
+        'user_level': 'mod'
     },
     '!addquote': {
         'limit': 0,
@@ -151,7 +151,7 @@ commands = {
     '!subcount': {
         'limit': 0,
         'argc': 0,
-        'ul': 'mod',
+        'user_level': 'mod',
         'return': 'command',
         'usage': '!subcount'
     },

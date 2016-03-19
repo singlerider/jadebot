@@ -100,9 +100,9 @@ def check_has_correct_args(message, command):
             return False
 
 
-def check_has_ul(username, command):
-    if "ul" in commands[command]:
-        if "mod" in commands[command]["ul"]:
+def check_has_user_level(username, command):
+    if "user_level" in commands[command]:
+        if "mod" in commands[command]["user_level"]:
             return True
     return False
 

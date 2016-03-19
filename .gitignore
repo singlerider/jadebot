@@ -9,3 +9,4 @@ globals.py
 venv/*
 .coverage
 htmlcov/
+**.sqlite3

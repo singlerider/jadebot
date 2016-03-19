@@ -13,10 +13,10 @@ import lib.functions_commands as commands
 import src.lib.command_headers
 import src.lib.cron as cron
 import src.lib.rive as rive
-from src.lib.twitch import Twitch
-from lib.functions_general import *
+from lib.functions_general import pbot
 from src.config.config import config
 from src.lib.irc import IRC
+from src.models.model import User, Channel, Message
 
 reload(sys)
 sys.setdefaultencoding("utf8")
@@ -57,12 +57,12 @@ class Bot(object):
             moderator = get_moderator(username, chan)
             if moderator:
                 increment_command_counter(chan, message[0])
-                # save_message(BOT_USER, channel, resp)
+                self.save_message(BOT_USER, channel, resp)
                 print("!-> " + resp)
                 return resp
         elif elements[0] == "reg":
             increment_command_counter(chan, message[0])
-            # save_message(BOT_USER, channel, resp)
+            self.save_message(BOT_USER, channel, resp)
             print("!-> " + resp)
             return resp
 
@@ -76,14 +76,14 @@ class Bot(object):
         chan = channel.lstrip("#")
         if message[0] == "!":
             message_split = message.split()
-            fetch_command = get_custom_command(chan, message_split[0])
-            if len(fetch_command) > 0:
-                if message_split[0] == fetch_command[0][1]:
-                    resp = self.return_custom_command(
-                        channel, message_split, username)
-                    if resp:
-                        self.IRC.send_message(channel, resp)
-        # save_message(username, channel, message)
+            # fetch_command = get_custom_command(chan, message_split[0])
+            # if len(fetch_command) > 0:
+            #     if message_split[0] == fetch_command[0][1]:
+            #         resp = self.return_custom_command(
+            #             channel, message_split, username)
+            #         if resp:
+            #             self.IRC.send_message(channel, resp)
+        self.save_message(username, channel, message)
         part = message.split(' ')[0]
         valid = False
         if commands.is_valid_command(message):
@@ -115,7 +115,7 @@ class Bot(object):
                         channel, message_split, username)
                     if resp:
                         self.IRC.send_alt_message(channel, resp)
-        # save_message(username, channel, message)
+        self.save_message(username, channel, message)
         part = message.split(' ')[0]
         valid = False
         if commands.is_valid_command(message):
@@ -133,10 +133,10 @@ class Bot(object):
     def whisper(self, username, channel, message):
         message = str(message.lstrip("!"))
         resp = rive.Conversation(self).run(username, message)[:350]
-        # save_message(username, "WHISPER", message)
+        self.save_message(username, "WHISPER", message)
         if resp:
-            print resp
-            # save_message(BOT_USER, "WHISPER", resp)
+            print "!->", resp
+            self.save_message(BOT_USER, "WHISPER", resp)
             self.IRC.send_whisper(username, str(resp))
             return
 
@@ -179,7 +179,7 @@ ask me directly?")
             commands.update_last_used(command, channel)
             self.IRC.send_message(channel, resp)
             return
-        if commands.check_has_ul(username, command):
+        if commands.check_has_user_level(username, command):
             user_data, __ = twitch.get_dict_for_users(channel)
             try:
                 moderator = get_moderator(username, channel.lstrip("#"))
@@ -206,8 +206,8 @@ ask me directly?")
         if result:
             resp = '(%s) : %s' % (username, result)
             pbot(resp, channel)
+            self.save_message(BOT_USER, channel, resp)  # pragma: no cover
             return resp[:350]
-            # save_message(BOT_USER, channel, resp)  # pragma: no cover
 
     def check_for_sub(self, channel, username, message):
         try:
@@ -219,7 +219,7 @@ ask me directly?")
 time subscription!".format(100, subbed_user)
                 self.IRC.send_message(channel, resp)
                 self.IRC.send_alt_message(channel, resp)
-                # save_message(BOT_USER, channel, resp)
+                self.save_message(BOT_USER, channel, resp)
             elif message_split[1] == "subscribed" and len(message_split) < 9:
                 months_subbed = message_split[3]
                 modify_user_points(subbed_user, int(months_subbed) * 100)
@@ -228,9 +228,18 @@ months straight and is getting {2} treats for loyalty!".format(
                     subbed_user, months_subbed, int(months_subbed) * 100)
                 self.IRC.send_message(channel, resp)
                 self.IRC.send_alt_message(channel, resp)
-                # save_message(BOT_USER, channel, resp)
+                self.save_message(BOT_USER, channel, resp)
         except Exception as error:  # pragma: no cover
             print error
+
+    def save_message(self, username, channel, message):
+        channel = channel.lstrip("#")
+        User.get_or_create(username=username)
+        Channel.get_or_create(channel=channel)
+        username_id = User.get(username=username).id
+        channel_id = Channel.get(channel=channel).id
+        Message.create(
+            username=username_id, channel=channel_id, message=message)
 
     def run(self):
 
