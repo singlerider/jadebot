@@ -6,7 +6,7 @@ import requests
 class Twitch:
 
     def __init__(self, channel, user):  # require these two for instantiation
-        self.channel = channel
+        self.channel = channel.lstrip("#")
         self.user = user
 
     # this endpoint fails often

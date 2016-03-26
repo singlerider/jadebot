@@ -23,11 +23,11 @@ commands = {
     },
     '!points': {
         'limit': 0,
-        'argc': 1,
+        'argc': 3,
         'return': 'command',
-        'usage': "!points ['treats'/'shots'/username/'list']",
+        'usage': "!points *['add'/'remove'] [username] [amount]",
         'optional': True,
-        'user_limit': 30
+        'user_limit': 0
     },
     # '!treats': {
     #     'limit': 0,

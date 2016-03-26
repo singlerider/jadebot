@@ -49,7 +49,7 @@ class Command(BaseModel):
     trigger = CharField(null=False)
     response = CharField(null=False)
     user_level = BooleanField(null=False)
-    time_interval = IntegerField(null=False)
+    time_interval = IntegerField(default=0, null=False)
     last_triggered = DateTimeField(default=datetime.datetime.now)
     times_used = IntegerField(null=False)
 

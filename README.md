@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/singlerider/lorenzotherobot.svg?branch=master)](https://travis-ci.org/singlerider/lorenzotherobot) [![Circle CI](https://circleci.com/gh/singlerider/lorenzotherobot/tree/master.svg?style=svg)](https://circleci.com/gh/singlerider/lorenzotherobot/tree/master)
-
-Try it out! The Code is live at [http://www.twitch.tv/curvyllama](http://www.twitch.tv/curvyllama) You can send a whisper by typing `/w Lorenzotherobot hi` into the chat (from any channel)!
+Try it out! The Code is live at [http://www.twitch.tv/jadejolie](http://www.twitch.tv/jadejolie) You can send a whisper by typing `/w Jadebot hi` into the chat (from any channel)!
 
 # Lorenzotherobot
 A bot with personality

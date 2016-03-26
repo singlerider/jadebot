@@ -19,10 +19,8 @@ class IRC:
         self.ircBuffer = {}
         self.ircBuffer["whisper"] = ""
         self.ircBuffer["chat"] = ""
-        self.ircBuffer["alt"] = ""
         self.connect("whisper")
         self.connect("chat")
-        self.connect("alt")
 
     def nextMessage(self, kind):
         if "\r\n" not in self.ircBuffer[kind]:
@@ -72,7 +70,6 @@ class IRC:
             return True
 
     def check_for_ping(self, data, kind):
-
         last_ping = time.time()
         if data.find('PING') != -1:
             self.sock[kind].send('PONG ' + data.split()[1] + '\r\n')
@@ -115,39 +112,20 @@ class IRC:
             for line in message.decode("utf8"):
                 self.send_message(recipient, str(time.time()))
 
-    def send_alt_message(self, channel, message):
-        if not message:
-            return
-
-        if isinstance(message, basestring):
-            self.sock["alt"].send('PRIVMSG %s :%s\r\n' % (channel, message))
-
-        if type(message) == list:
-            for line in message.decode("utf8"):
-                self.send_message(channel, line)
-
     def connect(self, kind):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setblocking(0)
         sock.settimeout(10)
+        port = 6667
         if kind == "whisper":
-            whisper_url = "http://tmi.twitch.tv/servers?cluster=group"
-            whisper_resp = requests.get(url=whisper_url)
-            whisper_data = json.loads(whisper_resp.content)
-            server = whisper_data["servers"][0].split(":")
-            WHISPER = [str(server[0]), int(server[1])]
-            print "Connecting to {0}:{1}".format(WHISPER[0], WHISPER[1])
-            self.connect_phases(sock, WHISPER[0], WHISPER[1], kind)
+            server = "group.tmi.twitch.tv"
+            print "Connecting to {0}:{1}".format(server, port)
+            self.connect_phases(sock, server, port, kind)
             self.join_channels([], kind)
         if kind == "chat":
-            print "Connecting to {0}:{1}".format(self.config['server'], self.config['port'])
-            self.connect_phases(
-                sock, self.config['server'], self.config['port'], kind)
-            self.join_channels(self.channels_to_string(
-                self.config['channels']), kind)
-        if kind == "alt":
-            print "Connecting to {0}:{1}".format(self.config['server'], self.config['port'])
-            self.connect_phases(sock, "irc.chat.twitch.tv", 80, kind)
+            server = "irc.chat.twitch.tv"
+            print "Connecting to {0}:{1}".format(server, port)
+            self.connect_phases(sock, server, port, kind)
             self.join_channels(self.channels_to_string(
                 self.config['channels']), kind)
 
@@ -162,16 +140,7 @@ class IRC:
         pp("Sending Nick " + self.config["username"])
         sock.send('NICK %s\r\n' % self.config['username'])
         self.sock[kind] = sock
-
         loginMsg = self.nextMessage(kind)
-        #:tmi.twitch.tv NOTICE * :Login unsuccessful
-        # or
-        # :tmi.twitch.tv 001 theepicsnail :Welcome, GLHF!
-        # if "unsuccessful" in loginMsg:
-        #     print "Failed to login. Check your oath_password and username in src/config/config.py"
-        #     sys.exit(1)
-
-        # Wait until we're ready before starting stuff.
         if kind == "chat":
             if "376" not in self.nextMessage(kind):
                 pass
@@ -180,7 +149,7 @@ class IRC:
         return ','.join(channel_list)
 
     def join_channels(self, channels, kind):
-        if kind == "chat" or kind == "alt":
+        if kind == "chat":
             pp('Joining channels %s.' % channels)
             self.sock[kind].send('JOIN %s\r\n' % channels)
         if kind == "whisper":
@@ -190,6 +159,6 @@ class IRC:
 
     def leave_channels(self, channels, kind):
         pp('Leaving channels %s,' % channels)
-        if kind == "chat" or kind == "alt":
+        if kind == "chat":
             self.sock[kind].send('PART %s\r\n' % channels)
         pp('Left channels.')

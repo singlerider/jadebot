@@ -1,23 +1,31 @@
-from src.models.model import User, Channel, ChannelUser, db
+from src.lib.points import modify_points
+from src.models.model import Channel, ChannelUser, User
 
 
 def cron(channel=None):
     from src.models.model import User, Channel, ChannelUser, db
     from src.lib.twitch import Twitch
+    from src.lib.moderators import add_moderator
     channel = channel.lstrip("#")
-    __, all_users = Twitch(channel, None).users()
+    if Twitch(channel, None).stream().get("stream") is None:
+        return
+    user_dict, all_users = Twitch(channel, None).users()
     with db.atomic():
+        # creates a given channel entry if not exists
         Channel.get_or_create(channel=channel)
         for user in all_users:
+            # creates a user entry if not exists
             User.get_or_create(username=user)
             try:
+                # attempts to retrieve a user object
                 ChannelUser.get(
                     username=User.get(username=user).id,
-                    channel=Channel.get(channel=channel
-                ).id)
+                    channel=Channel.get(channel=channel).id)
             except ChannelUser.DoesNotExist:
+                # if not exists, create channeluser object
                 ChannelUser.create(username=User.get(
                     username=user).id, channel=Channel.get(channel=channel).id)
+            # update the channeluser object to an incremented amount
             ChannelUser.update(
                 points=ChannelUser.points + 1,
                 time_in_chat=ChannelUser.time_in_chat + 5
@@ -25,6 +33,8 @@ def cron(channel=None):
                 ChannelUser.username == User.get(username=user).id,
                 ChannelUser.channel == Channel.get(channel=channel).id
             ).execute()
+    for user in user_dict["chatters"]["moderators"]:
+        add_moderator(channel, user)
     return
 
 
@@ -47,9 +57,17 @@ def points(args, **kwargs):
         resp = "You have {0} points and have been watching for {1} minutes".format(
             point_value, time_value)
         return resp
-    username = args[0]
-    user, created = User.create_or_get(username=username)
-    if created:
-        return username + " added!"
+    action = args[0]
+    username_to_modify = args[1]
+    amount = args[2]
+    try:
+        amount = int(amount)
+    except:
+        return "Amount must be a number."
+    if action == "add" or action == "remove":
+        modify_points(channel, [username_to_modify], action, amount)
+        return (
+            str(amount) + " points " + action.rstrip("e") + "ed on " +
+            username_to_modify + "!")
     else:
-        return username + " already exists!"
+        return "Action must be \"add\" or \"remove\"."
