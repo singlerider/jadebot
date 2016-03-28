@@ -16,12 +16,8 @@ config = {
     'username': 'JadeBot',
     # get this from http://twitchapps.com/tmi/
     'oauth_password': 'oauth:6yc3lsd1ho0jmw52vr58udcy2mqe32',
-
-    'debug': True,
     'log_messages': True,
-
     'channels': channels_to_join,
-
     # Cron jobs.
     'cron': {
         '#singlerider': [

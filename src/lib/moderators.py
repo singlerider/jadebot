@@ -19,9 +19,8 @@ def get_moderator(channel, user):
         is_mod = ChannelUser.get(
             username=User.get(username=user).id,
             channel=Channel.get(channel=channel).id).is_moderator
+        return is_mod
     except ChannelUser.DoesNotExist:
         # if not exists, create channeluser object
-        is_mod = 0
-    if is_mod == 0:
         is_mod = None
-    return is_mod
+        return is_mod

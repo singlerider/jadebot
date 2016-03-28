@@ -27,7 +27,8 @@ commands = {
         'return': 'command',
         'usage': "!points *['add'/'remove'] [username] [amount]",
         'optional': True,
-        'user_limit': 0
+        'user_limit': 0,
+        'user_level': 'mod'
     },
     # '!treats': {
     #     'limit': 0,

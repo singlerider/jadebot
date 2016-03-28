@@ -151,20 +151,17 @@ ask me directly?")
             self.IRC.send_message(channel, resp)
             return
         if commands.check_has_user_level(username, command):
-            user_data, __ = Twitch(channel.lstrip("#"), None).users()
-            try:
-                moderator = get_moderator(username, channel)
-                if not moderator and username != SUPERUSER:
+            moderator = get_moderator(channel, username)
+            if not moderator and username != SUPERUSER:
+                if commands.commands[command].get("optional") is not None and len(
+                        message.split(" ")) < 2:
+                    pass
+                else:
                     resp = '(%s) : %s' % (
                         username, "This is a moderator-only command!")
                     pbot(resp, channel)
                     self.IRC.send_whisper(username, resp)
                     return
-            except Exception as error:  # pragma: no cover
-                with open("errors.txt", "a") as f:
-                    error_message = "{0} | {1} : {2}\n{3}\n{4}".format(
-                        username, channel, command, user_data, error)
-                    f.write(error_message)
         approved_channels = [
             PRIMARY_CHANNEL, BOT_USER, SUPERUSER, TEST_USER, EXTRA_CHANNEL]
         if channel.lstrip("#") not in approved_channels:
