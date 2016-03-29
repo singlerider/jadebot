@@ -1,20 +1,23 @@
-# import src.lib.command_headers as command_headers
-# from src.lib.queries.command_queries import save_command
-#
-#
-# def add(args, **kwargs):
-#     command = args[0].lower()
-#     user_level = args[1]
-#     response = " ".join(args[2:])
-#     creator = kwargs.get("username", "testuser")
-#     channel = kwargs.get("channel", "testchannel")
-#     if command[0] is "!":
-#         if command not in command_headers.commands:
-#             if user_level == "reg" or user_level == "mod":
-#                 return save_command(command, creator, user_level, response, channel)
-#             else:
-#                 return "User level must be 'reg' or 'mod'"
-#         else:
-#             return "{} already built in to Lorenzo.".format(command)
-#     else:
-#         return "Command must begin with '!'"
+from src.models.model import User, Channel, Command, db
+
+
+def add(args, **kwargs):
+    username = kwargs.get("username")
+    channel = kwargs.get("channel")
+    args = args[0].split(" ")
+    trigger = args[0]
+    if trigger[0] != "!":
+        return "Commands must begin with \"!\""
+    user_level = args[1]
+    if user_level != "reg" and user_level != "mod":
+        return "user_level must be \"reg\" or \"mod\""
+    response = " ".join(args[2:])
+    with db.atomic():
+        User.get_or_create(username=username)
+        Channel.get_or_create(channel=channel)
+        Command.create(
+            username=User.get(username=username).id,
+            channel=Channel.get(channel=channel).id,
+            trigger=trigger.lstrip("!"), response=response, user_level=user_level,
+            times_used=0)
+    return "{0} created".format(trigger)
