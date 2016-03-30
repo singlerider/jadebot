@@ -51,7 +51,6 @@ class Bot(object):
             command = Command.get(
                 trigger=trigger,
                 channel=Channel.get(channel=chan).id)
-            # TODO repair the updated times used
             Command.update(times_used=Command.times_used+1).where(
                 Command.trigger == trigger,
                 Command.channel == Channel.get(channel=chan).id

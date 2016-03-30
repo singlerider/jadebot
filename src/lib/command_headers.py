@@ -123,10 +123,11 @@ commands = {
     },
     '!edit': {
         'limit': 0,
-        'argc': 4,
+        'argc': 1,
         'return': 'command',
-        'usage': '!edit [!command_name] [user_level (reg/mod)] [response (to add a custom user, use "{}")]',
-        'user_level': 'mod'
+        'usage': '!edit [!command_name] [user_level (reg/mod)] [response (to add a custom user, use "{}") (to include message count, use "[]")]',
+        'user_level': 'mod',
+        'space_case': True
     },
     '!weather': {
         'limit': 0,
