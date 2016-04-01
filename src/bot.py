@@ -24,13 +24,13 @@ from src.lib.moderators import get_moderator
 reload(sys)
 sys.setdefaultencoding("utf8")
 
-PRIMARY_CHANNEL = config["channels"][0]
-BOT_USER = config["username"]
-SUPERUSER = config["superuser"]
-TEST_USER = config["test_user"]
-EXTRA_CHANNEL = "lorenzotherobot"
+PRIMARY_CHANNEL = config["channels"][0].lstrip("#")
+BOT_USER = config["username"].lstrip("#")
+SUPERUSER = config["superuser"].lstrip("#")
+TEST_USER = config["test_user"].lstrip("#")
+EXTRA_CHANNEL = "lorenzotherobot".lstrip("#")
 
-NICKNAME = config["username"]
+NICKNAME = config["username"].lstrip("#")
 PASSWORD = config["oauth_password"]
 
 
