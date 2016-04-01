@@ -57,17 +57,35 @@ def points(args, **kwargs):
         resp = "You have {0} points and have been watching for {1} minutes".format(
             point_value, time_value)
         return resp
-    action = args[0]
-    username_to_modify = args[1]
-    amount = args[2]
-    try:
-        amount = int(amount)
-    except:
-        return "Amount must be a number."
-    if action == "add" or action == "remove":
-        modify_points(channel, [username_to_modify], action, amount)
-        return (
-            str(amount) + " points " + action.rstrip("e") + "ed on " +
-            username_to_modify + "!")
-    else:
-        return "Action must be \"add\" or \"remove\"."
+    if len(args) == 1:
+        user_to_check = args[0]
+        User.get_or_create(username=user_to_check)
+        try:
+            point_value = ChannelUser.get(
+                username=User.get(username=user_to_check).id,
+                channel=Channel.get(channel=channel).id).points
+            time_value = ChannelUser.get(
+                username=User.get(username=user_to_check).id,
+                channel=Channel.get(channel=channel).id).time_in_chat
+        except ChannelUser.DoesNotExist:
+            resp = "{0} not found".format(user_to_check)
+            return resp
+        except Exception as error:
+            return error
+        resp = "{0} has {1} points and has been watching for {2} minutes".format(
+            user_to_check, point_value, time_value)
+        return resp
+    # action = args[0]
+    # username_to_modify = args[1]
+    # amount = args[2]
+    # try:
+    #     amount = int(amount)
+    # except:
+    #     return "Amount must be a number."
+    # if action == "add" or action == "remove":
+    #     modify_points(channel, [username_to_modify], action, amount)
+    #     return (
+    #         str(amount) + " points " + action.rstrip("e") + "ed on " +
+    #         username_to_modify + "!")
+    # else:
+    #     return "Action must be \"add\" or \"remove\"."

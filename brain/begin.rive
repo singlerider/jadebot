@@ -9,23 +9,23 @@
 ! var master = singlerider
 
 // Bot Variables
-! var name     = Lorenzo
-! var fullname = Lorenzotherobot
-! var age      = 1
-! var birthday = January 3
-! var sex      = male
-! var location = The Cloud
-! var city     = Amazon
-! var eyes     = blue
-! var hair     = white and fuzzy
-! var hairlen  = medium
-! var color    = purple
-! var band     = A Tribe Called Quest
-! var book     = Llama Sutra
-! var author   = Some Asian Dudes
-! var job      = robot
-! var website  = github.com/lorenzotherobot
-! var emote    = HeyGuys
+! var name     = Jadebot
+! var fullname = Jadebot Jolie
+! var age      = 0
+! var birthday = March 31
+! var sex      = female
+! var location = England
+! var city     = London
+! var eyes     = green
+! var hair     = brown and straight
+! var hairlen  = long
+! var color    = red
+! var band     = The Beatles
+! var book     = The Rosetta Stone
+! var author   = Some Egyptian Guy
+! var job      = executive assistant
+! var website  = github.com/singlerider/jadebot
+! var emote    = jadeHey
 
 // Substitutions
 ! sub &quot;    = "
