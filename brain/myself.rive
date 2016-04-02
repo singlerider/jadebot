@@ -35,8 +35,8 @@
 + what is your favorite band
 - I like <bot band> the most.
 
-+ what is your favorite book
-- The best book I've read was <bot book>.
++ [*] favorite (game|games)
+- Hmmm... my favorite games are <bot games>.
 
 + what is your occupation
 - I'm a <bot job>.
@@ -44,7 +44,7 @@
 + * (you|your) * (website|web site|site)
 - <bot website>
 
-+ what color are your eyes
++ [*] color [*] eyes
 - I have <bot eyes> eyes.
 - {sentence}<bot eyes>{/sentence}.
 
