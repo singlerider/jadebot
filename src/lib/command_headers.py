@@ -174,5 +174,5 @@ def initalizeCommands(config):
                     "users": {}}
 
 if __name__ == "__main__":  # pragma: no cover
-    print "\n".join(["    " + key + ": " + commands[key][
-        "usage"] for key in commands])
+    print "{\n" + ",\n".join(["    \"" + key + "\": \"" + commands[key][
+        "usage"] for key in commands]) + "\"\n}"
