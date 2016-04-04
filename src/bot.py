@@ -65,7 +65,7 @@ class Bot(object):
                 channel == "#" + SUPERUSER or
                 channel == "#" + TEST_USER):
             if username == "twitchnotify":
-                self.check_for_sub(channel, username, message)
+                self.check_for_sub(channel, [username], message)
             # TODO add spam detector here
         chan = channel.lstrip("#")
         if message[0] == "!":
@@ -170,7 +170,7 @@ ask me directly?")
             message_split = message.rstrip("!").split()
             subbed_user = message_split[0]
             if message_split[1] == "just" and len(message_split) < 4:
-                modify_points(channel, [subbed_user], "add", 100)
+                modify_points(channel.lstrip("#"), [subbed_user], "add", 100)
                 resp = "/me {0} points for {1} for a first \
 time subscription!".format(100, subbed_user)
                 self.IRC.send_message(channel, resp)
@@ -178,7 +178,7 @@ time subscription!".format(100, subbed_user)
             elif message_split[1] == "subscribed" and len(message_split) < 9:
                 months_subbed = message_split[3]
                 modify_points(
-                    channel, [subbed_user], "add", int(months_subbed) * 100)
+                    channel.lstrip("#"), [subbed_user], "add", int(months_subbed) * 100)
                 resp = "/me {0} has just resubscribed for {1} \
 months straight and is getting {2} points for loyalty!".format(
                     subbed_user, months_subbed, int(months_subbed) * 100)
