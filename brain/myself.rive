@@ -64,6 +64,6 @@
 + [*] your favorite emote
 - <bot emote>
 
-+ say *
++ (say|echo|repeat) *
 - Okay. "<star1>"{weight=10}
 - No.

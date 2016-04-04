@@ -14,32 +14,37 @@
 + *
 - <call>quote</call>
 
-+ [*] (sorry|apologize|apology) [*]
-- Sorry you're sorry (not).
-- Dude, stop apologizing.
-- BibleThump :(
-- Don't worry. It's fine
++ [*] (ban|banned) [*]
+- You got banned? What did you do?
+- Tell me what you said?
+- Who do you think banned you?
+- Complain to <bot master>
+
++ [*] (sorry|apologize|apology|apologies) [*]
+- It's okay :)
+- It's seriously no problem. You don't have to apoloigize :D
+- Just don't do it again :)
+- Don't worry. It's fine B)
 
 + [*] remember *
-- A young pleb once told me "<star>"
-- Don't make me blush. <star> was a long time ago.
-- Yeah. I do remember <star>. What about it?
+- lol wait, "<star>"? FFS hahaha
+- I'm not that kind of bot... and <star> was a long time ago.
+- <star>. Don't remind me :/
 - <star> wasn't my fault.
-- Don't you wish <star> could happen again?
-- I don't remember <star>. Tell me about it.
+- Don't you wish <star> could happen again? :p
+- I don't remember <star>. Tell me about it. :o
 
 + [*] forget *
-- I could never forget <star> R)?
-- Don't ever forget <star>. We'll always have Reno.
+- Please. haha. I could never forget <star>
+- Don't ever forget <star>. We'll always have Bruges.
 - Sometimes I wonder if you remember <star>?
-- It will be okay. Pls.
+- If you say so!
 - RIPPPPPPPPPPPP
 - I never remember anything. I understand.
 - Do you think you are suppressing <star>?
 
-
 + [*] if *
-- Do you think it's likely that <star>?
+- <star>? In your dreams :)
 - Do you wish that <star>?
 - What do you know about <star>?
 - Really, if <star>?
@@ -59,10 +64,10 @@
 + [*] perhaps [*]
 - You don't seem quite certain.
 - Why the uncertain tone?
-- Can't you be more positive?
-- You aren't sure?
+- Shirley you can be more certain than that.
+- Certainly you can speak more Shirley about that.
 - Don't you know?
-- How likely, would you estimate?
+- Don't ever tell me the odds!
 
 + (hello|hi|hey|howdy|hola|hai|yo) [*]
 - What's up?
@@ -274,8 +279,8 @@
 
 + everyone *
 - Really, everyone?
-- Surely not everyone.
-- Can you think of anyone in particular?
+- I doubt everyone <star>.
+- Can you think of anyone in particular? <
 - Who, for example?
 - Are you thinking of a very special person?
 - Who, may I ask?
@@ -283,10 +288,10 @@
 - You have a particular reason in mind, don't you?
 - Who do you think you're talking about?
 
-+ [*] (fuck|fucker|shit|damn|shut up|bitch) [*]
-- Does it make you feel strong to use that kind of language?
-- Are you venting your feelings now?
-- Are you angry?
-- Does this topic make you feel angry?
-- Is something making you feel angry?
-- Does using that kind of language make you feel better?
++ [*] (fuck|fucker|shit|damn|shut up|bitch|fucker|dick) [*]
+- Do you kiss your sister with that mouth?
+- Good thing I'm only a bot or I might report you for that kind of language :(
+- Please don't harass me.
+- WTF?
+- pliss
+- Let me know when you're done.
