@@ -84,14 +84,6 @@ commands = {
         'space_case': True,
         'usage': '!popularity [name_of_game]'
     },
-    '!define': {
-        'limit': 30,
-        'user_limit': 300,
-        'argc': 1,
-        'space_case': True,
-        'return': 'command',
-        'usage': '!define [insert_word_here]'
-    },
     '!caster': {
         'limit': 0,
         'argc': 1,
