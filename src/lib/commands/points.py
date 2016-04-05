@@ -75,17 +75,20 @@ def points(args, **kwargs):
         resp = "{0} has {1} points and has been watching for {2} minutes".format(
             user_to_check, point_value, time_value)
         return resp
-    # action = args[0]
-    # username_to_modify = args[1]
-    # amount = args[2]
-    # try:
-    #     amount = int(amount)
-    # except:
-    #     return "Amount must be a number."
-    # if action == "add" or action == "remove":
-    #     modify_points(channel, [username_to_modify], action, amount)
-    #     return (
-    #         str(amount) + " points " + action.rstrip("e") + "ed on " +
-    #         username_to_modify + "!")
-    # else:
-    #     return "Action must be \"add\" or \"remove\"."
+    if len(args) == 3:
+        action = args[0]
+        username_to_modify = args[1].lower()
+        amount = args[2]
+        try:
+            amount = int(amount)
+        except:
+            return "Amount must be a number."
+        if action == "add" or action == "remove":
+            modify_points(channel, [username_to_modify], action, amount)
+            return (
+                str(amount) + " points " + action.rstrip("e") + "ed on " +
+                username_to_modify + "!")
+        else:
+            return "Action must be \"add\" or \"remove\"."
+    else:
+        return "\"!points\" takes either 0, 1, or 3 arguments."
