@@ -58,7 +58,7 @@ def points(args, **kwargs):
             point_value, time_value)
         return resp
     if len(args) == 1:
-        user_to_check = args[0]
+        user_to_check = args[0].lower()
         User.get_or_create(username=user_to_check)
         try:
             point_value = ChannelUser.get(
