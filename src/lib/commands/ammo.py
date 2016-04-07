@@ -38,7 +38,7 @@ def cron(channel=None):
     return
 
 
-def points(args, **kwargs):
+def ammo(args, **kwargs):
     username = kwargs.get("username")
     channel = kwargs.get("channel")
     if len(args) < 1:
@@ -54,7 +54,7 @@ def points(args, **kwargs):
             time_value = 0
         except Exception as error:
             return error
-        resp = "You have {0} points and have been watching for {1} minutes".format(
+        resp = "You have {0} ammo and have been watching for {1} minutes".format(
             point_value, time_value)
         return resp
     if len(args) == 1:
@@ -72,7 +72,7 @@ def points(args, **kwargs):
             return resp
         except Exception as error:
             return error
-        resp = "{0} has {1} points and has been watching for {2} minutes".format(
+        resp = "{0} has {1} ammo and has been watching for {2} minutes".format(
             user_to_check, point_value, time_value)
         return resp
     if len(args) == 3:
@@ -86,9 +86,9 @@ def points(args, **kwargs):
         if action == "add" or action == "remove":
             modify_points(channel, [username_to_modify], action, amount)
             return (
-                str(amount) + " points " + action.rstrip("e") + "ed on " +
+                str(amount) + " ammo " + action.rstrip("e") + "ed on " +
                 username_to_modify + "!")
         else:
             return "Action must be \"add\" or \"remove\"."
     else:
-        return "\"!points\" takes either 0, 1, or 3 arguments."
+        return "\"!ammo\" takes either 0, 1, or 3 arguments."

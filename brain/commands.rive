@@ -1,7 +1,7 @@
 ! version = 2.0
 
-> object points python
-    from src.lib.commands.points import points
+> object ammo python
+    from src.lib.commands.ammo import ammo
     username = rs.current_user()
     if len(args) > 1:
       args = args[:1]
@@ -14,11 +14,11 @@
     return define([query]).replace("\n", " ")
 < object
 
-+ points
-- <call>points</call>
++ ammo
+- <call>ammo</call>
 
-+ points *
-- <call>points <star></call>
++ ammo *
+- <call>ammo <star></call>
 
 + define *
 - <call>whisper_define <star1></call>

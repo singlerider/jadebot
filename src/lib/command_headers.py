@@ -21,13 +21,13 @@ commands = {
         'usage': '!opinion',
         'user_limit': 30
     },
-    '!points': {
+    '!ammo': {
         'limit': 0,
         'argc': 3,
         'return': 'command',
         'usage': "!points *['add'/'remove'] [username] [amount]",
         'optional': True,
-        'user_limit': 0,
+        'user_limit': 30,
         'user_level': 'mod'
     },
     # '!treats': {
