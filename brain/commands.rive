@@ -5,7 +5,7 @@
     username = rs.current_user()
     if len(args) > 1:
       args = args[:1]
-    return points(args, channel="jadejolie", username=username).replace("\n", " ")
+    return ammo(args, channel="jadejolie", username=username).replace("\n", " ")
 < object
 
 > object whisper_define python
