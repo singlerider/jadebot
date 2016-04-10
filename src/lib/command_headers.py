@@ -1,3 +1,5 @@
+import globals
+
 commands = {
     '!report': {
         'limit': 200,
@@ -150,6 +152,12 @@ commands = {
         'return': 'command',
         'usage': '!subcount'
     },
+    '!reload': {
+        'limit': 0,
+        'argc': 0,
+        'return': 'command',
+        'usage': '!reload'
+    }
 }
 
 user_cooldowns = {"channels": {}}
@@ -157,6 +165,7 @@ user_cooldowns = {"channels": {}}
 
 def initalizeCommands(config):
     for channel in config['channels']:
+        globals.CHANNEL_INFO[channel.lstrip("#")] = {"drop": {}}
         user_cooldowns["channels"][channel] = {"commands": {}}
         for command in commands:
             commands[command][channel] = {}
