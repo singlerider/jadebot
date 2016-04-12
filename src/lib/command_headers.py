@@ -47,6 +47,7 @@ commands = {
     },
     '!followers': {
         'limit': 30,
+        'user_level': 'mod',
         'return': 'command',
         'argc': 0,
         'usage': '!followers',
