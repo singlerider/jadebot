@@ -74,7 +74,7 @@ class Bot(object):
                 chan, trigger.lstrip("!"), username)
             if fetch_command:
                 self.IRC.send_message(channel, fetch_command)
-        self.save_message(username, channel, message)
+        # self.save_message(username, channel, message)
         part = message.split(' ')[0]
         valid = False
         if commands.is_valid_command(message):
@@ -92,10 +92,10 @@ class Bot(object):
     def whisper(self, username, channel, message):
         message = str(message.lstrip("!"))
         resp = rive.Conversation(self).run(username, message)[:350]
-        self.save_message(username, "WHISPER", message)
+        # self.save_message(username, "WHISPER", message)
         if resp:
             print "!->", resp
-            self.save_message(BOT_USER, "WHISPER", resp)
+            # self.save_message(BOT_USER, "WHISPER", resp)
             self.IRC.send_whisper(username, str(resp))
             return
 
@@ -162,7 +162,7 @@ ask me directly?")
         if result:
             resp = '(%s) : %s' % (username, result)
             pbot(resp, channel)
-            self.save_message(BOT_USER, channel, resp)  # pragma: no cover
+            # self.save_message(BOT_USER, channel, resp)  # pragma: no cover
             return resp[:350]
 
     def check_for_sub(self, channel, username, message):
@@ -174,7 +174,7 @@ ask me directly?")
                 resp = "/me {0} points for {1} for a first \
 time subscription!".format(100, subbed_user)
                 self.IRC.send_message(channel, resp)
-                self.save_message(BOT_USER, channel, resp)
+                # self.save_message(BOT_USER, channel, resp)
             elif message_split[1] == "subscribed" and len(message_split) < 9:
                 months_subbed = message_split[3]
                 modify_points(
@@ -183,7 +183,7 @@ time subscription!".format(100, subbed_user)
 months straight and is getting {2} points for loyalty!".format(
                     subbed_user, months_subbed, int(months_subbed) * 100)
                 self.IRC.send_message(channel, resp)
-                self.save_message(BOT_USER, channel, resp)
+                # self.save_message(BOT_USER, channel, resp)
         except Exception as error:  # pragma: no cover
             print error
 
