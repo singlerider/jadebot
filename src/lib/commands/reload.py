@@ -11,7 +11,8 @@ def reload(**kwargs):
         modify_points(channel, [username], "add", amount)
         globals.CHANNEL_INFO[channel]["drop"]["amount"] = 0
         globals.CHANNEL_INFO[channel]["drop"]["active"] = False
-        response = "{0} just reloaded and stocked up with {1} ammo!"
+        response = "{0} just reloaded and stocked up with {1} ammo!".format(
+            username, amount)
         return response
     else:
         return no_drop

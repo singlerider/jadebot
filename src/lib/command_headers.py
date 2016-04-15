@@ -158,6 +158,12 @@ commands = {
         'argc': 0,
         'return': 'command',
         'usage': '!reload'
+    },
+    '!drop': {
+        'limit': 0,
+        'argc': 0,
+        'return': 'command',
+        'usage': '!drop'
     }
 }
 
