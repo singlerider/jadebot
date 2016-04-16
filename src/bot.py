@@ -100,6 +100,8 @@ class Bot(object):
             return
 
     def handle_command(self, command, channel, username, message):
+        moderator = get_moderator(channel, username)
+        print moderator
         if command == message:
             args = []
         elif command == message and command in commands.keys():  # pragma: no cover
@@ -108,7 +110,7 @@ class Bot(object):
             args = [message[len(command) + 1:]]
         if not commands.check_is_space_case(command) and args:
             args = args[0].split(" ")
-        if commands.is_on_cooldown(command, channel):
+        if commands.is_on_cooldown(command, channel) and not moderator:
             pbot('Command is on cooldown. (%s) (%s) (%ss remaining)' % (
                 command, username, commands.get_cooldown_remaining(
                     command, channel)), channel)
@@ -120,7 +122,7 @@ class Bot(object):
                 ) + " more seconds in " + channel.lstrip("#") +
                 ". Can I help you?")
             return
-        if commands.check_has_user_cooldown(command):
+        if commands.check_has_user_cooldown(command) and not moderator:
             if commands.is_on_user_cooldown(command, channel, username):
                 self.IRC.send_whisper(
                     username, "Slow down! Try " + command +
@@ -139,7 +141,6 @@ ask me directly?")
             self.IRC.send_message(channel, resp)
             return
         if commands.check_has_user_level(username, command):
-            moderator = get_moderator(channel, username)
             if not moderator and username != SUPERUSER:
                 if commands.commands[command].get("optional") is not None and len(
                         message.split(" ")) < 2:
