@@ -164,6 +164,13 @@ commands = {
         'argc': 0,
         'return': 'command',
         'usage': '!drop'
+    },
+    '!leaderboard': {
+        'limit': 300,
+        'argc': 0,
+        'return': 'command',
+        'usage': '!leaderboard',
+        'user_level': 'mod'
     }
 }
 
