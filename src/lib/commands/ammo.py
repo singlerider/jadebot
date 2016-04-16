@@ -19,22 +19,22 @@ def cron(channel=None):
             Channel.get_or_create(channel=channel)
             for user in all_users:
                 # creates a user entry if not exists
-                User.get_or_create(username=user)
+                User.get_or_create(username=user.lower())
                 try:
                     # attempts to retrieve a user object
                     ChannelUser.get(
-                        username=User.get(username=user).id,
+                        username=User.get(username=user.lower()).id,
                         channel=Channel.get(channel=channel).id)
                 except ChannelUser.DoesNotExist:
                     # if not exists, create channeluser object
                     ChannelUser.create(username=User.get(
-                        username=user).id, channel=Channel.get(channel=channel).id)
+                        username=user.lower()).id, channel=Channel.get(channel=channel).id)
                 # update the channeluser object to an incremented amount
                 ChannelUser.update(
                     points=ChannelUser.points + 1,
                     time_in_chat=ChannelUser.time_in_chat + 5
                 ).where(
-                    ChannelUser.username == User.get(username=user).id,
+                    ChannelUser.username == User.get(username=user.lower()).id,
                     ChannelUser.channel == Channel.get(channel=channel).id
                 ).execute()
         for user in user_dict["chatters"]["moderators"]:
@@ -76,10 +76,10 @@ def ammo(args, **kwargs):
     if len(args) < 1:
         try:
             point_value = ChannelUser.get(
-                username=User.get(username=username).id,
+                username=User.get(username=username.lower()).id,
                 channel=Channel.get(channel=channel).id).points
             time_value = ChannelUser.get(
-                username=User.get(username=username).id,
+                username=User.get(username=username.lower()).id,
                 channel=Channel.get(channel=channel).id).time_in_chat
         except ChannelUser.DoesNotExist:
             point_value = 0
