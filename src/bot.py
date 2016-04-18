@@ -172,7 +172,7 @@ ask me directly?")
             subbed_user = message_split[0]
             if message_split[1] == "just" and len(message_split) < 4:
                 modify_points(channel.lstrip("#"), [subbed_user], "add", 100)
-                resp = "/me {0} points for {1} for a first \
+                resp = "/me {0} ammo for {1} for a first \
 time subscription!".format(100, subbed_user)
                 self.IRC.send_message(channel, resp)
                 # self.save_message(BOT_USER, channel, resp)
@@ -181,7 +181,7 @@ time subscription!".format(100, subbed_user)
                 modify_points(
                     channel.lstrip("#"), [subbed_user], "add", int(months_subbed) * 100)
                 resp = "/me {0} has just resubscribed for {1} \
-months straight and is getting {2} points for loyalty!".format(
+months straight and is getting {2} ammo for loyalty!".format(
                     subbed_user, months_subbed, int(months_subbed) * 100)
                 self.IRC.send_message(channel, resp)
                 # self.save_message(BOT_USER, channel, resp)
