@@ -158,7 +158,8 @@ ask me directly?")
             if command.lstrip("!") in prevented_list:
                 return
         result = commands.pass_to_function(
-            command, args, username=username, channel=channel.lstrip("#"))
+            command, args, username=username, channel=channel.lstrip("#"),
+            irc=self.IRC)
         commands.update_last_used(command, channel)
         if result:
             resp = '(%s) : %s' % (username, result)

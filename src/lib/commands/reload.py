@@ -15,4 +15,6 @@ def reload(**kwargs):
             username, amount)
         return response
     else:
-        return no_drop
+        irc = kwargs.get("irc")
+        irc.send_whisper(username, no_drop)
+        return
