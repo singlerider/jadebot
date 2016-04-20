@@ -98,7 +98,7 @@ commands = {
         'limit': 0,
         'argc': 2,
         'return': 'command',
-        'usage': '!donation [username] [dollar_amount]',
+        'usage': '!donation [username] [currency_amount]',
         'user_level': 'mod'
     },
     '!add': {
