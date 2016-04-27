@@ -3,6 +3,7 @@ from src.models.model import Channel, ChannelUser, User, db
 
 def modify_points(channel, users, action, amount):
     channel = channel.lstrip("#")
+    print channel, users, action, amount
     if action == "remove":
         amount = amount * -1
     with db.atomic():
@@ -22,7 +23,7 @@ def modify_points(channel, users, action, amount):
                     username=user.lower()).id, channel=Channel.get(
                         channel=channel).id)
             # update the channeluser object to an incremented amount
-            ChannelUser.update(
+            print ChannelUser.update(
                 points=ChannelUser.points + amount
             ).where(
                 ChannelUser.username == User.get(username=user.lower()).id,
