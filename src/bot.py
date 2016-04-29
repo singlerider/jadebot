@@ -47,6 +47,7 @@ class Bot(object):
         self.run()
 
     def return_custom_command(self, chan, trigger, username):
+        Channel.get_or_create(channel=chan)
         try:
             command = Command.get(
                 trigger=trigger,
@@ -100,8 +101,8 @@ class Bot(object):
             return
 
     def handle_command(self, command, channel, username, message):
+        User.get_or_create(usrname=username)
         moderator = get_moderator(channel, username)
-        print moderator
         if command == message:
             args = []
         elif command == message and command in commands.keys():  # pragma: no cover

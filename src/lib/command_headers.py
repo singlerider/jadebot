@@ -27,7 +27,7 @@ commands = {
         'limit': 0,
         'argc': 3,
         'return': 'command',
-        'usage': "!points *['add'/'remove'] [username] [amount]",
+        'usage': "!ammo *['add'/'remove'] [username] [amount]",
         'optional': True,
         'user_limit': 30,
         'user_level': 'mod'
