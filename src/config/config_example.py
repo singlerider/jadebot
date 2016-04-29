@@ -1,4 +1,4 @@
-import src.lib.commands.points as points
+import src.lib.commands.ammo as ammo
 global config
 
 channels_to_join = ['#singlerider']
@@ -22,7 +22,7 @@ config = {
     'cron': {
         '#singlerider': [
             # time, run, callback
-            (15, True, points.cron)  # treat handed out every 10 minutes
+            (15, True, ammo.cron)  # treat handed out every 10 minutes
             # (60, True, pokemon.cron),  # pokemon released every 20 minutes
             # (600, True, treats.cron),
         ],
