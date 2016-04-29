@@ -2,10 +2,11 @@
 
 > object ammo python
     from src.lib.commands.ammo import ammo
+    from src.config.config import channels_to_join
     username = rs.current_user()
     if len(args) > 1:
       args = args[:1]
-    return ammo(args, channel="jadejolie", username=username).replace("\n", " ")
+    return ammo(args, channel=channels_to_join[0].lstrip("#"), username=username).replace("\n", " ")
 < object
 
 > object whisper_define python
