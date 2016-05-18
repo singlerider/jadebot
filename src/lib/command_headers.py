@@ -9,12 +9,6 @@ commands = {
         'user_level': 'mod',
         'usage': "!report [insert bug report text here]"
     },
-    '!commands': {
-        'limit': 10,
-        'argc': 0,
-        'return': 'command',
-        'usage': '!commands'
-    },
     '!opinion': {
         'limit': 0,
         'argc': 0,
@@ -32,16 +26,9 @@ commands = {
         'user_limit': 30,
         'user_level': 'mod'
     },
-    # '!treats': {
-    #     'limit': 0,
-    #     'return': 'command',
-    #     'argc': 3,
-    #     'user_level': 'mod',
-    #     'usage': '!treats [add/remove/set] [username] [number]'
-    # },
     '!help': {
         'limit': 15,
-        'return': 'There is a super useful README for the bot at  at github.com/singlerider/PLACEHOLDER',
+        'return': 'There is a super useful README for the bot at  at github.com/singlerider/jadebot',
         'usage': '!help',
         'user_limit': 30
     },
@@ -100,58 +87,6 @@ commands = {
         'return': 'command',
         'usage': '!donation [username] [currency_amount]',
         'user_level': 'mod'
-    },
-    '!add': {
-        'limit': 0,
-        'argc': 1,
-        'return': 'command',
-        'usage': '!add [!command_name] [user_level (reg/mod)] [response (to add a custom user, use "{}") (to include message count, use "[]")]',
-        'user_level': 'mod',
-        'space_case': True
-    },
-    '!rem': {
-        'limit': 0,
-        'argc': 1,
-        'return': 'command',
-        'usage': '!rem [!command_name]',
-        'user_level': 'mod'
-    },
-    '!edit': {
-        'limit': 0,
-        'argc': 1,
-        'return': 'command',
-        'usage': '!edit [!command_name] [user_level (reg/mod)] [response (to add a custom user, use "{}") (to include message count, use "[]")]',
-        'user_level': 'mod',
-        'space_case': True
-    },
-    '!weather': {
-        'limit': 0,
-        'argc': 2,
-        'return': 'command',
-        'usage': '!weather [units (metric/imperial)] [location (any format)]',
-        'user_level': 'mod'
-    },
-    '!addquote': {
-        'limit': 0,
-        'argc': 1,
-        'user_limit': 15,
-        'return': 'command',
-        'usage': '!addquote [quote]',
-        'space_case': True
-    },
-    '!quote': {
-        'limit': 0,
-        'argc': 0,
-        'user_limit': 5,
-        'return': 'command',
-        'usage': '!quote'
-    },
-    '!subcount': {
-        'limit': 0,
-        'argc': 0,
-        'user_level': 'mod',
-        'return': 'command',
-        'usage': '!subcount'
     },
     '!reload': {
         'limit': 0,

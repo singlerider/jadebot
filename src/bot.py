@@ -101,7 +101,7 @@ class Bot(object):
             return
 
     def handle_command(self, command, channel, username, message):
-        User.get_or_create(usrname=username)
+        User.get_or_create(username=username)
         moderator = get_moderator(channel, username)
         if command == message:
             args = []
