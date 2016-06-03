@@ -88,6 +88,13 @@ commands = {
         'usage': '!donation [username] [currency_amount]',
         'user_level': 'mod'
     },
+    '!tip': {
+        'limit': 0,
+        'argc': 2,
+        'return': 'command',
+        'usage': '!tip [username] [currency_amount]',
+        'user_level': 'mod'
+    },
     '!reload': {
         'limit': 0,
         'argc': 0,
